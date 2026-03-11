@@ -1,16 +1,15 @@
 # language: es
-Característica: Gestión de ingresos y reportes financieros para balance mensual
+Característica: Ciclo de vida E2E de usuario nuevo y primera transacción
   Como analista financiero de la aplicación de presupuesto
-  Quiero registrar los ingresos del período categorizados por tipo
-  Para visualizar su impacto en el balance general y los reportes consolidados del panel principal
+  Quiero registrar un usuario nuevo y registrar su primer ingreso
+  Para garantizar que el sistema inicia con un balance exacto desde cero y sin datos residuales
 
-  Antecedentes:
-    Dado que Christopher se autentica exitosamente en la plataforma financiera
-
-  Esquema del escenario: Registro exitoso de un ingreso y validación en el reporte financiero
-    Cuando el registra un nuevo ingreso de tipo "<descripcion>" por un monto de <monto>
-    Entonces el reporte financiero del panel principal debe reflejar el ingreso registrado
+  Esquema del escenario: CP-E2E - Creación de cuenta nueva y validación de ingreso inicial
+    Dado que el visitante accede a la página de registro de la plataforma
+    Cuando él crea una cuenta nueva con el nombre "<nombre>" y el correo base "<correo_base>"
+    Y registra un nuevo ingreso de tipo "<descripcion>" por un monto de <monto>
+    Entonces el reporte financiero del panel principal debe reflejar el balance exacto de <monto>
 
     Ejemplos:
-      | descripcion     | monto |
-      | Salario Mensual | 2000  |
+      | nombre      | correo_base       | descripcion     | monto |
+      | Christopher | chris.qa@test.com | Salario Inicial | 2000  |

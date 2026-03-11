@@ -24,4 +24,13 @@ public class FinancialReport {
             return DashboardUI.TOTAL_INCOME_VALUE.resolveFor(actor).getText();
         };
     }
+
+    public static Question<String> balanceValue() {
+        return actor -> {
+            actor.attemptsTo(
+                    WaitUntil.the(DashboardUI.BALANCE_VALUE, WebElementStateMatchers.isVisible())
+            );
+            return DashboardUI.BALANCE_VALUE.resolveFor(actor).getText();
+        };
+    }
 }

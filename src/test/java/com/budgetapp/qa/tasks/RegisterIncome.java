@@ -1,8 +1,10 @@
 package com.budgetapp.qa.tasks;
 
+import com.budgetapp.qa.interactions.ClearFieldViaJavaScript;
 import com.budgetapp.qa.interactions.SelectFromRadix;
 import com.budgetapp.qa.ui.TransactionUI;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
@@ -21,7 +23,7 @@ public class RegisterIncome implements Task {
     }
 
     public static RegisterIncome with(String description, String amount) {
-        return new RegisterIncome(description, amount);
+        return Tasks.instrumented(RegisterIncome.class, description, amount);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class RegisterIncome implements Task {
                 SelectFromRadix.theOption(TransactionUI.SALARY_CATEGORY_OPTION)
                         .fromTrigger(TransactionUI.CATEGORY_SELECT_TRIGGER),
                 Enter.theValue(description).into(TransactionUI.DESCRIPTION_INPUT),
+                ClearFieldViaJavaScript.on(TransactionUI.AMOUNT_INPUT),
                 Enter.theValue(amount).into(TransactionUI.AMOUNT_INPUT),
                 Click.on(TransactionUI.CREATE_TRANSACTION_BUTTON)
         );

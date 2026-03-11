@@ -2,6 +2,7 @@ package com.budgetapp.qa.tasks;
 
 import com.budgetapp.qa.ui.DashboardUI;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.waits.WaitUntil;
@@ -19,11 +20,11 @@ public class MapsTo implements Task {
     }
 
     public static MapsTo theDashboard() {
-        return new MapsTo(Section.DASHBOARD);
+        return Tasks.instrumented(MapsTo.class, Section.DASHBOARD);
     }
 
     public static MapsTo theTransactionsList() {
-        return new MapsTo(Section.TRANSACTIONS);
+        return Tasks.instrumented(MapsTo.class, Section.TRANSACTIONS);
     }
 
     @Override
