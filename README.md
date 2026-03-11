@@ -33,6 +33,29 @@ Este repositorio corresponde al **Entregable 2 de 3** de la Maestría en Automat
 
 ---
 
+## 🛠️ Entorno y Prerrequisitos (Compatibilidad)
+
+> ⚠️ **El uso de estas versiones exactas es obligatorio para compilar y ejecutar la suite correctamente.**
+
+| Componente | Versión Requerida | Verificación |
+|------------|------------------|--------------|
+| **Java / JDK** | `17` (LTS) | `java -version` → `openjdk 17.x.x` |
+| **Gradle** | `8.8` (distribución binaria) | `./gradlew --version` → `Gradle 8.8` |
+| **Docker** | `20.x+` | `docker --version` |
+| **Docker Compose** | `v2.x+` | `docker compose version` |
+
+### Java 17
+
+El proyecto define `sourceCompatibility = JavaVersion.VERSION_17` y `targetCompatibility = JavaVersion.VERSION_17` en el `build.gradle`. Cualquier versión inferior provocará errores de compilación por features de lenguaje no soportadas. Versiones superiores (JDK 21+) pueden generar advertencias por APIs internas deprecadas.
+
+### Gradle 8.8 (Wrapper Incluido)
+
+El proyecto incluye el **Gradle Wrapper** (`gradlew`) preconfigurado en `gradle/wrapper/gradle-wrapper.properties` apuntando a `gradle-8.8-bin.zip`. Esto significa que **no es necesario instalar Gradle manualmente** — el wrapper descargará la versión exacta automáticamente en la primera ejecución. Esta versión fue seleccionada específicamente para eliminar los `Deprecated Gradle features` warnings que aparecen en versiones 9.x.
+
+> 📝 **Nota del Autor:** La combinación **JDK 17 + Gradle 8.8** constituye la matriz de compatibilidad verificada para Serenity BDD 5.3.2, Cucumber 7.18.1 y JUnit Platform 5.10.2. Esta configuración garantiza una ejecución estable, sin conflictos de dependencias ni advertencias de deprecación, tanto en entornos locales como en pipelines de CI/CD.
+
+---
+
 ## 🔄 Escenario E2E: Ciclo de Vida Completo
 
 El framework ejecuta un flujo End-to-End **idempotente** y **autocontenido** que garantiza la validación desde cero, sin datos residuales:
